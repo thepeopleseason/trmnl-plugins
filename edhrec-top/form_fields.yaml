@@ -1,0 +1,17 @@
+- keyname: doesnt_matter
+  name: About This Plugin (EDHRec Top Commanders)
+  field_type: author_bio
+  description: Listing the most popular commanders on <a class=underline href="https://edhrec.com/">edhrec.com</a> for the past week, month, and last 2 years.
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com
+- keyname: list_priority
+  description: Select which list has priority on smaller views (mashups)
+  field_type: select
+  options:
+  - "Week": "IDX_0"
+  - "Month": "IDX_1"
+  - "Years": "IDX_2"
+  default: "IDX_0"
+  name: List Priority
+
