@@ -1,0 +1,8 @@
+<div class="layout">
+  <div class="column w--auto">
+  {% render "card_face", name: name, mana_cost: mana_cost, type_line: type_line, oracle_text: oracle_text, flavor_text: flavor_text, power: power, toughness: toughness, loyalty: loyalty, artist: artist %}
+    <span class="description clamp--none">{{ rarray[0]|upcase }} {{ cn }} / {{ set | upcase }}
+      {% unless prices %}<br> Price: ${{ prices.usd }} / €{{prices.eur}} {% endunless %}</span>
+  </div>
+</div>
+{% render "title_bar", trmnl: trmnl %}

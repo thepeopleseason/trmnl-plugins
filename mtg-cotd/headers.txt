@@ -1,0 +1,1 @@
+User-Agent=TRMNL_plugin&Accept=application/json

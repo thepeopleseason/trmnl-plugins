@@ -1,0 +1,6 @@
+{% assign oracle_text = oracle_text | truncatewords: 40 %}
+<div class="layout">
+  <div class="column">
+    {% render "card_face", name: name, type_line: type_line, oracle_text: oracle_text, artist: artist %}
+  </div>
+</div>

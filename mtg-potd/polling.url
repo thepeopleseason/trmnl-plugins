@@ -1,0 +1,1 @@
+https://api.scryfall.com/cards/random?q=(t:plane+or+t:phenomenon)+{{ scryfall_query }}

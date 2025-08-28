@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://thepeopleseason.github.io/planechase/card-symbols.css">
+
+{% assign rarray = IDX_0.rarity | split: '' %} 
+{% assign cn = IDX_0.collector_number | prepend: "000" | slice: -4, 4 %}
+
+{% template card_face %}
+{% assign rbrace = "}" %}
+{% assign lbrace = "{" %}
+{% if faces %}
+{% assign face_or_card = "description" %}
+{% else %}
+{% assign face_or_card = "title" %}
+{% endif %}
+{% if power %}
+  {% assign ptl = power | append: "/" | append: toughness %}
+{% else %}
+  {% if loyalty %}
+    {% assign ptl = loyalty %}
+  {% endif %}
+{% endif %}
+<span class="{{ face_or_card }}">{{ name }}
+{% if mana_cost != empty %}{{ mana_cost | prepend: " &nbsp; "  | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}{% endif %}
+</span> 
+<span class="description clamp--none">{{ type_line }}</span>
+<span class="description clamp--none {% unless flavor_text == empty %}label--underline{% endunless %}">
+  {{ oracle_text | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br  }}
+  <br> {{ flavor_text | newline_to_br }}</span>
+{% if ptl != empty %}<span class="{{ face_or_card }} text--right"><strong>{{ ptl }}</strong></span>{% endif %}
+<span class="description"> Artist: {{ artist }} </span>
+{% endtemplate %}
+
+{% template title_bar %} 
+<div class="title_bar">
+  <img class="image" src="https://svgs.scryfall.io/card-symbols/PW.svg">
+  {{ trmnl.plugin_settings.instance_name }} 
+  <span class="instance">{{ instance }}</span>
+</div>
+{% endtemplate %}

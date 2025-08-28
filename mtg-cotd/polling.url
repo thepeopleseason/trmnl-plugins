@@ -1,0 +1,2 @@
+https://api.scryfall.com/cards/random?q=game:paper+-is:artseries+{{ scryfall_query }}
+https://api.scryfall.com/symbology/

@@ -1,0 +1,20 @@
+<div class="layout">
+  <div class="column">
+  {% if card_faces %}
+    {% assign card = card_faces[0] %}
+    {% render "card_face", name: card.name, mana_cost: card.mana_cost, type_line: card.type_line, oracle_text: card.oracle_text, flavor_text: card.flavor_text, power: card.power, toughness: card.toughness, loyalty: card.loyalty, artist: card.artist, faces: true %}
+  {% else %}
+    {% render "card_face", name: IDX_0.name, mana_cost: IDX_0.mana_cost, type_line: IDX_0.type_line, oracle_text: IDX_0.oracle_text, flavor_text: IDX_0.flavor_text, power: IDX_0.power, toughness: IDX_0.toughness, loyalty: IDX_0.loyalty, artist: IDX_0.artist %}
+  {% endif %}
+  </div>
+  <div class="column">
+    {% if card_faces %}
+    {% assign card = IDX_0.card_faces[1] %}
+    {% render "card_face", name: card.name, mana_cost: card.mana_cost, type_line: card.type_line, oracle_text: card.oracle_text, flavor_text: card.flavor_text, power: card.power, toughness: card.toughness, loyalty: card.loyalty, artist: card.artist, faces: true %}
+    {% else %}    
+    <span class="description clamp--none">
+      EDHRec Rank: {{ IDX_0.edhrec_rank }}
+      <br> Price: ${{ IDX_0.prices.usd }}/€{{ IDX_0.prices.eur }} </span>
+    {% endif %}
+  </div>
+</div>
