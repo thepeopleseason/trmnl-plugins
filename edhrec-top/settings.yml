@@ -1,3 +1,14 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: "https://json.edhrec.com/pages/commanders/week.json\r\nhttps://json.edhrec.com/pages/commanders/month.json\r\nhttps://json.edhrec.com/pages/commanders/year.json\r\n"
+polling_headers: ''
+polling_body: ''
+id: 131111
+custom_fields:
 - keyname: doesnt_matter
   name: About This Plugin (EDHRec Top Commanders)
   field_type: author_bio
@@ -9,9 +20,10 @@
   description: Select which list has priority on smaller views (mashups)
   field_type: select
   options:
-  - "Week": "IDX_0"
-  - "Month": "IDX_1"
-  - "Years": "IDX_2"
-  default: "IDX_0"
+  - Week: IDX_0
+  - Month: IDX_1
+  - Years: IDX_2
+  default: IDX_0
   name: List Priority
-
+name: EDHRec Top MTG Commanders
+refresh_interval: 1440
