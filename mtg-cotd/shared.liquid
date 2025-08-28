@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://thepeopleseason.github.io/planechase/card-symbols.css">
 
-{% assign rarray = IDX_0.rarity | split: '' %} 
-{% assign cn = IDX_0.collector_number | prepend: "000" | slice: -4, 4 %}
+{% assign rarray = rarity | split: '' %} 
+{% assign cn = collector_number | prepend: "000" | slice: -4, 4 %}
 
 {% template card_face %}
 {% assign rbrace = "}" %}

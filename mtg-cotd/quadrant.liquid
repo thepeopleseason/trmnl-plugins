@@ -1,18 +1,24 @@
 {% assign rbrace = "}" %}
 {% assign lbrace = "{" %}
-{% if IDX_0.power %}
-  {% assign ptl = IDX_0.power | append: "/" | append: IDX_0.toughness %}
+{% if power %}
+  {% assign ptl = power | append: "/" | append: toughness %}
 {% else %}
-  {% if IDX_0.loyalty %}
-    {% assign ptl = IDX_0.loyalty %}
+  {% if loyalty %}
+    {% assign ptl = loyalty %}
   {% endif %}
+{% endif %}
+
+{% if card_faces %}
+{% assign otext = card_faces[0].oracle_text | append: " // " | append: card_faces[1].oracle_text %}
+{% else %}
+{% assign otext = oracle_text %}
 {% endif %}
 
 <div class="layout">
   <div class="column">
-    <span class="title title--small">{{ IDX_0.name }}  {{ IDX_0.mana_cost | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}</span>
-    <span class="description clamp--none">{{ IDX_0.type_line }}</span>
-    <span class="description clamp--none">{{ IDX_0.oracle_text | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br }}</span>
+    <span class="title title--small">{{ name }}  {{ mana_cost | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}</span>
+    <span class="description clamp--none">{{ type_line }}</span>
+    <span class="description clamp--none">{{ otext | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br }}</span>
     <span class="title title--small clamp--none text--right">{{ ptl }}</span>
   </div>
 </div>
