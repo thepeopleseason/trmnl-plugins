@@ -1,0 +1,28 @@
+- keyname: user_location
+  name: User Location
+  field_type: string
+- keyname: metric
+  field_type: select
+  options: 
+  - Fahrenheit
+  - Celsius
+  name: Metric
+- keyname: time24
+  field_type: select
+  options: 
+  - "12-hour time" : false
+  - "24-hour time" : true
+  name: Time Display
+- keyname: leading_zero
+  field_type: select
+  options: 
+  - "Do not include leading zero in hour display" : false
+  - "Include leading zero in hour display" : true
+  name: Leading Zero
+- keyname: doesnt_matter
+  name: About This Plugin
+  field_type: author_bio
+  description: Time (sort of) and Weather. Inspired by the Pebble Watchface DIN Time
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com

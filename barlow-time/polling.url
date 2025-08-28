@@ -1,0 +1,1 @@
+https://weather-worker.lively-paper-cd01.workers.dev/?location={{ user_location }}&metric={{ metric }}

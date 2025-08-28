@@ -1,0 +1,183 @@
+{% template header %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" rel="stylesheet">
+
+<style>
+  .pt-sans {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  .pt-sans-regular {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .info-text {
+    font-size: 23px;
+  }
+  .dtime {
+    text-align: center;
+    font-size: 250px;
+    letter-spacing: -6px;
+    line-height: 75%;
+  }
+  .ddate {
+    text-align: left;
+    font-size: 60px;
+    line-height: 75%;
+    margin-top: -0.65en;
+    padding: 0.1em;
+  }
+  .daymonth {
+    font-size: 30px;
+    padding: -3px;
+    margin: -3px 0px 3px;
+  }
+  .current_temp {
+    font-size: 35pt;
+    margin-bottom: 0.2en;
+  }
+  /* Material Icons Font Setup - Using Google Fonts CDN */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Weather Icon Sizes */
+  .weather-icon-large {
+    font-size: 240px;
+  }
+
+  .weather-icon-small {
+    font-size: 60px;
+  }
+</style>
+{% endtemplate %}
+
+{% template short_header %}
+<style>
+  .info-text {
+    font-size: 16px;
+  }
+  .dtime {
+    font-size: 140px;
+    letter-spacing: -3px;
+  }
+  .ddate {
+    font-size: 35px;
+  }
+  .daymonth {
+    font-size: 15px;
+    margin: -10px 0px -10px;
+  }
+  .current_temp {
+    font-size: 17pt;
+    margin-bottom: 0.2em;    
+  }
+  .material-symbols-outlined {
+    font-size: 12px;
+  }
+  .weather-icon-large {
+    font-size: 120px;
+  }
+  .weather-icon-small {
+    font-size: 25px;
+  }
+</style>
+{% endtemplate %}
+
+{% template weather_icon %}
+<span class="material-symbols-outlined weather-icon-{{ size }}">
+  {% if precip and precip > 0 %}rainy{% else %}
+  {% case status %}
+  {% when 'clear_day' %}wb_sunny
+  {% when 'clear_night' %}dark_mode
+  {% when 'partly_cloudy_day' %}partly_cloudy_day
+  {% when 'partly_cloudy_night' %}nights_stay
+  {% when 'cloudy' %}cloud
+  {% when 'rainy' %}rainy
+  {% when 'thunderstorm' %}thunderstorm
+  {% when 'bolt' %}bolt
+  {% when 'snowy' %}cloudy_snowing
+  {% when 'foggy' %}foggy
+  {% when 'error' %}error
+  {% else %}device_unknown
+  {% endcase %}
+  {% endif %}
+</span>
+{% endtemplate %}
+
+{% template weather_current %}
+<div class="flex flex--col h--46" style="line-height: 75%; margin-left:2px; margin-top:2px;">
+  <div style="border: solid;">{% render "weather_icon", status: current.i, size: "small" %}</div>
+  <div style="border: dotted;">{% render "weather_icon", status: daily[0].i, size: "small", precip: daily[0].p %}</div>
+  <span class="pt-sans info-text">{{ aqi.text }} {{ aqi.value }}</span>
+  <span class="pt-sans info-text">UV: {{ current.u }}</span>
+  <span class="pt-sans daymonth" style="margin-top: 0.5em;">{{ date_now | date: "%a" | upcase }}</span>
+  <span class="pt-sans ddate bg--white text--black">{{ date_now | date: "%d" }}</span>
+  <span class="pt-sans daymonth">{{ date_now | date: "%b" | upcase }}</span>
+</div>
+<div class="flex flex--col">
+  <span class="pt-sans current_temp">{{ current.t }}°</span>
+  <span class="pt-sans info-text">{{ high }}°<br>{{ low }}°</span>
+</div>
+{% endtemplate %}
+
+{% template hourly_forecast %}
+<div class="flex flex--col flex--left"> 
+  <div class="pt-sans text--right">
+    {% for hour in hourly %}
+    {% assign current_hour = date_now | date: "%H" | plus:0 %}
+    {% assign loopskip = forloop.index | modulo: 2 %} 
+    {% unless loopskip == 0 %}
+      {% unless forloop.index < current_hour %}
+    <span class="pt-sans-regular info-text">
+      {{ hour.tm }} 
+      {% render "weather_icon", status: hour.i, size: "tiny" %}
+      {{ hour.t }}°</span><br>
+      {% endunless %}
+    {% endunless %} 
+    {% endfor %}
+  </div>
+</div>
+{% endtemplate %}
+
+{% template time_big %}
+{% assign hour_format = "%" %}
+{% assign text_format = "text--center" %}
+{% if trmnl.plugin_settings.custom_fields_values.leading_zero == "false" %}
+  {% assign hour_format = hour_format | append: "-" %}
+  {% assign text_format = "text--right" %}
+{% endif %}
+{% if trmnl.plugin_settings.custom_fields_values.time24 == "true" %}
+  {% assign hour_format = hour_format | append: "H" %}
+{% else %}
+  {% assign hour_format = hour_format | append: "I" %}
+{% endif %}
+<div class="flex flex--col flex--left"> 
+  <div class="pt-sans dtime {{ text_format }}">{{ date_now | date: hour_format }}
+    <br>{{ date_now | date: "%M" }}</div>
+</div>
+{% endtemplate %}
+
+{% template title_bar %}
+<div class="title_bar">
+  <div class="title">{{ trmnl.plugin_settings.instance_name }}</div>
+  <div class="instance"></div>
+</div>
+{% endtemplate %}

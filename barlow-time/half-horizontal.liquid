@@ -1,0 +1,9 @@
+{% render "header" %}
+{% render "short_header" %}
+
+{% assign date_now = "now" | date: "%s" | plus: trmnl.user.utc_offset %}
+<div class="flex flex--top flex--left h--full bg--black text--white">
+  {% render "weather_current", current: current, daily: daily, aqi: aqi, high: high, low: low, date_now: date_now %}
+  {% render "hourly_forecast", hourly: hourly, date_now: date_now %}
+  {% render "time_big", date_now: date_now, trmnl: trmnl %}
+</div>
