@@ -1,0 +1,17 @@
+{% assign date_now = "now" | date: "%s" | plus: trmnl.user.utc_offset %}
+<div class="grid grid--cols-2">
+<div class="item grid">
+ <div class="flex flex--col flex--center">
+  <div class="pt-sans dtime" style="padding-top: 10px;">{{ current.t }}<span style="padding-left: 5px;">°</span></div>
+  <div class="pt-sans dtime">{% render "weather_icon", status: current.i, size: "small" %}</div>
+ </div>
+</div>
+<div class="item grid">
+ <div class="flex flex--col flex--center">
+  <div class="pt-sans info-text">{{ high }}° / {{low}}°</div>
+    <span class="pt-sans info-text">feels like {{ current.f }}°</span>
+    <span class="pt-sans info-text" style="padding-bottom: 22px;">AQI: {{ aqi.text }}-{{ aqi.value }}</span>
+  </div>
+</div>
+</div>
+
