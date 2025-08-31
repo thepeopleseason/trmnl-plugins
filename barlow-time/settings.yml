@@ -26,10 +26,18 @@ custom_fields:
   name: Time Display
 - keyname: leading_zero
   field_type: select
+  default: Include leading zero in hour display
   options:
   - Do not include leading zero in hour display: false
   - Include leading zero in hour display: true
   name: Leading Zero
+- keyname: invert
+  field_type: select
+  default: White text on black background
+  options:
+  - White text on black background: false
+  - Black text on white background: true
+  name: Invert (show black text on white background)
 - keyname: doesnt_matter
   name: About This Plugin
   field_type: author_bio

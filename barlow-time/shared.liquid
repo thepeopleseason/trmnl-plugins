@@ -1,3 +1,8 @@
+{% assign idisplay = "bg--black text--white" %}
+{% if trmnl.plugin_settings.custom_fields_values.invert == "true" %}
+  {% assign idisplay = "bg--white text--black" %}
+{% endif %}
+
 {% template header %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,13 +96,13 @@
     padding: 12px 0 3px;
   }
   .daymonth {
-    font-size: 15px;
+    font-size: 15px; 
     padding: -6px;
     margin: -6px 0px 1px;
   }
   .current_temp {
     margin-top: 18px;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.2em;    
   }
   .temp_range {
     margin-top: 20px;
@@ -152,19 +157,19 @@
 {% endtemplate %}
 
 {% template hourly_forecast %}
-<div class="flex flex--col flex--left">
+<div class="flex flex--col flex--left"> 
   <div class="text--right">
     {% for hour in hourly %}
     {% assign current_hour = date_now | date: "%H" | plus:0 %}
-    {% assign loopskip = forloop.index | modulo: 2 %}
+    {% assign loopskip = forloop.index | modulo: 2 %} 
     {% unless loopskip == 0 %}
       {% unless forloop.index < current_hour %}
     <span class="info-text">
-      {{ hour.tm }}
+      {{ hour.tm }} 
       {% render "weather_icon", status: hour.i, size: "tiny" %}
       {{ hour.t }}°</span><br>
       {% endunless %}
-    {% endunless %}
+    {% endunless %} 
     {% endfor %}
   </div>
 </div>
@@ -182,7 +187,7 @@
 {% else %}
   {% assign hour_format = hour_format | append: "I" %}
 {% endif %}
-<div class="flex flex--col flex--left">
+<div class="flex flex--col flex--left"> 
   <div class="dtime {{ text_format }}">{{ date_now | date: hour_format }}
     <br>{{ date_now | date: "%M" }}</div>
 </div>
