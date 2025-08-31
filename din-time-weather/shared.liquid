@@ -1,9 +1,3 @@
-{% assign idisplay = "bg--black text--white" %}
-{% if trmnl.plugin_settings.custom_fields_values.invert == "true" %}
-  {% assign idisplay = "bg--white text--black" %}
-{% endif %}
-
-{% template header %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
@@ -23,6 +17,9 @@
   }
   .info-text {
     font-size: 23px;
+  }
+  .info-text::first-line {
+    line-height: 110%;
   }
   .dtime {
     text-align: center;
@@ -46,7 +43,7 @@
     margin-bottom: 0.2en;
   }
   .temp_range {
-    margin-top: 20px;
+    margin-top: 30px;
   }
   /* Material Icons Font Setup - Using Google Fonts CDN */
   .material-symbols-outlined {
@@ -73,11 +70,16 @@
   .weather-icon-small {
     font-size: 60px;
   }
-  .temphigh {
+  .temp_range::first-line {
     text-decoration: underline;
+    line-height: 80%;
   }
 </style>
-{% endtemplate %}
+
+{% assign idisplay = "bg--black text--white" %}
+{% if trmnl.plugin_settings.custom_fields_values.invert == "true" %}
+  {% assign idisplay = "bg--white text--black" %}
+{% endif %}
 
 {% template short_header %}
 <style>
@@ -96,16 +98,19 @@
     padding: 12px 0 3px;
   }
   .daymonth {
-    font-size: 15px; 
+    font-size: 15px;
     padding: -6px;
     margin: -6px 0px 1px;
   }
   .current_temp {
     margin-top: 18px;
-    margin-bottom: 0.2em;    
+    margin-bottom: 0.2em;
   }
   .temp_range {
     margin-top: 20px;
+  }
+  .temp_range::first-line {
+    line-height: 95%;
   }
   .material-symbols-outlined {
     font-size: 12px;
@@ -144,32 +149,31 @@
 <div class="flex flex--col h--46" style="line-height: 75%; margin-left:2px; margin-top:2px;">
   <div style="border: solid;">{% render "weather_icon", status: current.i, size: "small" %}</div>
   <div style="border: dotted;">{% render "weather_icon", status: daily[0].i, size: "small", precip: daily[0].p %}</div>
-  <span class="info-text">{{ aqi.text }} {{ aqi.value }}</span>
-  <span class="info-text">UV: {{ current.u }}</span>
+  <span class="info-text text--center">{{ aqi.text }} {{ aqi.value }}<br>UV: {{ current.u }}</span>
   <span class="daymonth" style="margin-top: 0.5em;">{{ date_now | date: "%a" | upcase }}</span>
   <span class="ddate bg--white text--black">{{ date_now | date: "%d" }}</span>
   <span class="daymonth">{{ date_now | date: "%b" | upcase }}</span>
 </div>
 <div class="flex flex--col">
   <span class="current_temp info-text">{{ current.t }}</span>
-  <span class="info-text temp_range text--center"><span class="temphigh">&nbsp;{{ high }}&nbsp;</span><br>&nbsp;{{ low }}&nbsp;</span>
+  <span class="info-text temp_range text--center">&nbsp;{{ high }}&nbsp;<br>&nbsp;{{ low }}&nbsp;</span>
 </div>
 {% endtemplate %}
 
 {% template hourly_forecast %}
-<div class="flex flex--col flex--left"> 
+<div class="flex flex--col flex--left">
   <div class="text--right">
     {% for hour in hourly %}
     {% assign current_hour = date_now | date: "%H" | plus:0 %}
-    {% assign loopskip = forloop.index | modulo: 2 %} 
+    {% assign loopskip = forloop.index | modulo: 2 %}
     {% unless loopskip == 0 %}
       {% unless forloop.index < current_hour %}
     <span class="info-text">
-      {{ hour.tm }} 
+      {{ hour.tm }}
       {% render "weather_icon", status: hour.i, size: "tiny" %}
       {{ hour.t }}°</span><br>
       {% endunless %}
-    {% endunless %} 
+    {% endunless %}
     {% endfor %}
   </div>
 </div>
@@ -187,7 +191,7 @@
 {% else %}
   {% assign hour_format = hour_format | append: "I" %}
 {% endif %}
-<div class="flex flex--col flex--left"> 
+<div class="flex flex--col flex--left">
   <div class="dtime {{ text_format }}">{{ date_now | date: hour_format }}
     <br>{{ date_now | date: "%M" }}</div>
 </div>

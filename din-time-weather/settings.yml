@@ -12,6 +12,7 @@ custom_fields:
 - keyname: user_location
   name: User Location
   field_type: string
+  description: City, State / Zip code
 - keyname: metric
   field_type: select
   options:
@@ -41,9 +42,9 @@ custom_fields:
 - keyname: doesnt_matter
   name: About This Plugin
   field_type: author_bio
-  description: Time (sort of) and Weather. Inspired by the Pebble Watchface DIN Time
+  description: Time (sort of) and Weather. Inspired by the Pebble Watchface <a class="underline" href="https://store-beta.rebble.io/app/54f9cb9ecf945829e8000048">DIN Time</a>
   github_url: https://github.com/thepeopleseason
   learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
   email_address: matchstick@gmail.com
-name: DIN Time/Weather
+name: DIN Weather
 refresh_interval: 15
