@@ -9,10 +9,17 @@ polling_headers: ''
 polling_body: ''
 id: 131778
 custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin
+  field_type: author_bio
+  description: Time (sort of) and Weather. Inspired by the Pebble Watchface <a class="underline" href="https://store-beta.rebble.io/app/54f9cb9ecf945829e8000048">DIN Time</a>
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com
 - keyname: user_location
   name: User Location
   field_type: string
-  description: City, State / Zip code
+  description: Examples:<br>Paris, France (City/country)<br>10101 (Pass US Zipcode, UK Postcode, Canada Postal code)<br>33.7501,84.3885 (Lat/long)
 - keyname: metric
   field_type: select
   options:
@@ -27,24 +34,33 @@ custom_fields:
   name: Time Display
 - keyname: leading_zero
   field_type: select
-  default: Include leading zero in hour display
+  default: 'true'
   options:
   - Do not include leading zero in hour display: false
   - Include leading zero in hour display: true
   name: Leading Zero
 - keyname: invert
   field_type: select
-  default: White text on black background
+  default: 'false'
   options:
   - White text on black background: false
   - Black text on white background: true
   name: Invert (show black text on white background)
-- keyname: doesnt_matter
-  name: About This Plugin
-  field_type: author_bio
-  description: Time (sort of) and Weather. Inspired by the Pebble Watchface <a class="underline" href="https://store-beta.rebble.io/app/54f9cb9ecf945829e8000048">DIN Time</a>
-  github_url: https://github.com/thepeopleseason
-  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
-  email_address: matchstick@gmail.com
+- keyname: hz_alt
+  field_type: select
+  default: 'false'
+  options:
+  - Standard Large-Time Display: false
+  - 2-Day Weather Forecast Display: true
+  name: Alternative Half Horizontal Display
+  description: Instead of a standard, large-time display, the half horizontal view may display a large current temperature, current conditions, and a simple 2-day forecast
+- keyname: quad_alt
+  field_type: select
+  default: 'false'
+  options:
+  - Standard Large-Time Display: false
+  - Hourly Forecast Display: true
+  name: Alternative Quadrant Display
+  description: Instead of a standard, large-time display, the quadrant view displays an hourly forecast
 name: DIN Weather
 refresh_interval: 15

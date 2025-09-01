@@ -43,7 +43,7 @@
     margin-bottom: 0.2en;
   }
   .temp_range {
-    margin-top: 30px;
+    margin-top: 25px;
   }
   /* Material Icons Font Setup - Using Google Fonts CDN */
   .material-symbols-outlined {
@@ -166,7 +166,11 @@
   <div class="text--right">
     {% for hour in hourly %}
     {% if two_col and forloop.index == 1 %}{% continue %}{% endif %}
+    {% if skip_times == true %}
     {% assign loopskip = forloop.index | modulo: 2 %}
+    {% else %}
+    {% assign loopskip = 1 %}
+    {% endif %}
     {% unless loopskip == 0 %}
       {% unless forloop.index < current_hour %}
     <span class="info-text">

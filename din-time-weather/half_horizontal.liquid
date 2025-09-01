@@ -1,8 +1,33 @@
+{% if trmnl.plugin_settings.custom_fields_values.hz_alt == "true" %}
+<div class="layout bg--black text--white">
+  <div class="column text--center">
+    {% render "weather_icon", status: current.i, size: "small" %}
+    <span class="pt-sans-regular info-text">{{ high }}° / {{low}}°<br>
+    feels like {{ current.f }}°<br>
+    AQI: {{ aqi.text }} {{ aqi.value }}</span>
+  </div>
+  <div class="column">
+    <span class="pt-sans-regular" style="font-size: 230px; margin-top: 60px;">{{ current.t }}</span>
+  </div>
+  <div class="column text--center">
+    {% render "weather_icon", status: daily[0].i, size: "small", precip: daily[0].p %}
+    <span class="pt-sans-regular info-text">{{ daily[0].d }}<br>
+      {{ daily[0].i | replace: "wb_", "" | replace: "_"," " | replace: "day" | capitalize }}<br>
+      {{ daily[0].n }}° / {{ daily[0].x }}°</span>
+  </div>
+  <div class="column text--center">
+    {% render "weather_icon", status: daily[1].i, size: "small", precip: daily[1].p %}
+    <span class="pt-sans-regular info-text">{{ daily[1].d }}<br>
+      {{ daily[1].i | replace: "wb_", "" | replace: "_"," " | replace: "day" | capitalize }}<br>
+      {{ daily[1].n }}° / {{ daily[1].x }}°</span>
+  </div>
+</div>
+{% else %}
 {% render "short_header" %}
-
 {% assign date_now = "now" | date: "%s" | plus: trmnl.user.utc_offset %}
 <div class="flex flex--top flex--left h--full {{ idisplay }}">
   {% render "weather_current", current: current, daily: daily, aqi: aqi, high: high, low: low, date_now: date_now %}
-  {% render "hourly_forecast", hourly: hourly, two_col: true %}
+  {% render "hourly_forecast", hourly: hourly, skip_times: true, two_col: true %}
   {% render "time_big", date_now: date_now, trmnl: trmnl %}
 </div>
+{% endif %}
