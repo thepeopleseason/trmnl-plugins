@@ -1,21 +1,26 @@
 {%liquid
 assign list_priority = trmnl.plugin_settings.custom_fields_values.list_priority
 case list_priority
-  when "IDX_2"
-    assign data = IDX_2
-  when "IDX_1"
-    assign data = IDX_1
-  else
-    assign data = IDX_0
+when "IDX_2"
+assign data = IDX_2
+when "IDX_1"
+assign data = IDX_1
+else
+assign data = IDX_0
 endcase
 %}
 {% template top_column %}
-    <div class="column" data-list-limit="true" data-list-max-height="{% unless height == empty %}{{ height }}{% else %}auto{% endunless %}" data-list-hidden-count="false">
-    {% if add_label %}EDHRec Top Commanders {% endif %}{{ index.container.json_dict.cardlists[0].header }}  
-    {% for cmdr in index.container.json_dict.cardlists[0].cardviews %}
-      {% render "commander", commander: cmdr %}
-    {% endfor %}
-    </div>
+{% if height == empty %}
+{% assign hvalue = "auto" %}
+{% else %}
+{% assign hvalue = height %}
+{% endif %}
+<div class="column" data-list-max-height="{{ hvalue }}" data-list-limit="true" data-list-hidden-count="false">
+  <span class="label label--medium group-header" data-group-header="true">{% if add_label %}EDHRec Top Commanders {% endif %}{{ index.container.json_dict.cardlists[0].header }}</span>
+  {% for cmdr in index.container.json_dict.cardlists[0].cardviews %}
+  {% render "commander", commander: cmdr %}
+  {% endfor %}
+</div>
 {% endtemplate %}
 
 {% template commander %}
