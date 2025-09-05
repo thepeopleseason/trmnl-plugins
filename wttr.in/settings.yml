@@ -1,0 +1,16 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: https://wttr.in/{{location}}?format=j1
+polling_headers: ''
+polling_body: ''
+id: 149512
+custom_fields:
+- keyname: location
+  field_type: string
+  name: Weather Location
+name: My Plugin
+refresh_interval: 1440

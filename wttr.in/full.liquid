@@ -1,0 +1,8 @@
+<div class="flex flex--row flex--left">  
+{% render "condition", data: current_condition[0], current: true %}
+</div>
+<div class="flex flex--col">
+{% render "day", day_struct: weather[0] %}
+{% render "day", day_struct: weather[1] %}
+{% render "day", day_struct: weather[2] %}
+</div>

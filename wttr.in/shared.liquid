@@ -1,0 +1,97 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+
+<style>
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+  .weather-icon-large {
+    font-size: 90px;
+  }
+  .timelabel {
+    text-align: center;
+    display: block;
+    break-after: always;
+  }
+  .daylabel {
+    text-align: center;
+    margin-bottom: -30px;
+    padding: 2px;
+    border: dotted;
+  }
+</style>
+
+{% template weather_icon %}
+<span class="material-symbols-outlined weather-icon-large">
+  {% case status %}
+  {% when 'clear_day' %}wb_sunny
+  {% when 'Sunny' %}wb_sunny
+  {% when 'Clear ' %}wb_sunny
+  {% when 'clear_night' %}dark_mode
+  {% when 'partly_cloudy_day' %}partly_cloudy_day
+  {% when 'Partly cloudy' %}partly_cloudy_day
+  {% when 'Partly Cloudy ' %}partly_cloudy_day
+  {% when 'partly_cloudy_night' %}nights_stay
+  {% when 'cloudy' %}cloud
+  {% when 'Overcast ' %}cloud
+  {% when 'Cloudy ' %}cloud
+  {% when 'rainy' %}rainy
+  {% when 'thunderstorm' %}thunderstorm
+  {% when 'Thundery outbreaks in nearby' %}thunderstorm
+  {% when 'bolt' %}bolt
+  {% when 'snowy' %}cloudy_snowing
+  {% when 'foggy' %}foggy
+  {% when 'error' %}error
+  {% else %}device_unknown
+  {% endcase %}
+</span>
+{% endtemplate %}
+
+{% template condition %}
+{% if current %}
+{% assign temp = data.temp_F %}
+{% assign ws = data.windspeedMiles %}
+{% assign stretch = "" %}
+{% else %}
+{% assign temp = data.tempF %}
+{% assign stretch = "stretch-x" %}
+{% assign ws = data.windspeedMiles|append: "-"|append: data.WindGustMiles %}
+{% endif %}
+
+  <div class="{{ stretch }}">
+  <div class="label label--small timelabel">{{ timelabel }}</div>
+  <div class="item text--gray">{% render "weather_icon", status: data.weatherDesc[0].value %}
+  <div class="{{ stretch }}">
+    <span class="label label--small clamp--1">{{ data.weatherDesc[0].value }}</span><br>
+    <span class="label label--small">{{ temp }}({{ data.FeelsLikeF }}) °F</span><br>
+    <span class="label label--small">{{ ws }} mph</span><br>
+    <span class="label label--small">{{ data.visibilityMiles }} mi</span><br>
+    <span class="label label--small">{{ data.precipInches }} in</span><br>
+  </div>
+  </div>
+  </div>
+{% endtemplate %}
+
+{% template day %}
+<div class="daylabel label label--small">{{ day_struct.date | date: "%a %d %b" }}</div>
+<div class="flex flex--row stretch-x"> 
+  {% render "condition", data: day_struct.hourly[3], timelabel: "Morning" %}
+  {% render "condition", data: day_struct.hourly[4], timelabel: "Noon" %}
+  {% render "condition", data: day_struct.hourly[6], timelabel: "Evening" %}
+  {% render "condition", data: day_struct.hourly[7], timelabel: "Night" %}
+</div>
+
+{% endtemplate %}
