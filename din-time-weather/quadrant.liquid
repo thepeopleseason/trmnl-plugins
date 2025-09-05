@@ -2,13 +2,13 @@
 
 {% if trmnl.plugin_settings.custom_fields_values.quad_alt == "true" %}
 
-<div class="layout bg--black text--white">
+<div class="din layout bg--black text--white">
   {% render "hourly_forecast", hourly: hourly, skip_times: true, two_col: true %}
 </div>
 {% else %}
 {% render "short_header" %}
 
-<div class="flex flex--top flex--left h--full {{ idisplay }}">
+<div class="din flex flex--top flex--left h--full {{ idisplay }}">
   {% render "weather_current", current: current, daily: daily, aqi: aqi, high: high, low: low, date_now: date_now %}
   {% render "hourly_forecast", hourly: hourly, date_now: date_now %}
   {% render "time_big", date_now: date_now, trmnl: trmnl %}

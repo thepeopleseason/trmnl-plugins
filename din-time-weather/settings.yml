@@ -62,5 +62,5 @@ custom_fields:
   - Hourly Forecast Display: true
   name: Alternative Quadrant Display
   description: Instead of a standard, large-time display, the quadrant view displays an hourly forecast
-name: DIN Weather
+name: DIN Time 風
 refresh_interval: 15

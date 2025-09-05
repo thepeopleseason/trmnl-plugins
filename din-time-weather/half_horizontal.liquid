@@ -1,5 +1,5 @@
 {% if trmnl.plugin_settings.custom_fields_values.hz_alt == "true" %}
-<div class="layout bg--black text--white">
+<div class="din layout bg--black text--white">
   <div class="column text--center">
     {% render "weather_icon", status: current.i, size: "small" %}
     <span class="pt-sans-regular info-text">{{ high }}° / {{low}}°<br>
@@ -25,7 +25,7 @@
 {% else %}
 {% render "short_header" %}
 {% assign date_now = "now" | date: "%s" | plus: trmnl.user.utc_offset %}
-<div class="flex flex--top flex--left h--full {{ idisplay }}">
+<div class="din flex flex--top flex--left h--full {{ idisplay }}">
   {% render "weather_current", current: current, daily: daily, aqi: aqi, high: high, low: low, date_now: date_now %}
   {% render "hourly_forecast", hourly: hourly, skip_times: true, two_col: true %}
   {% render "time_big", date_now: date_now, trmnl: trmnl %}
