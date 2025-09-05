@@ -1,0 +1,25 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: https://api.scryfall.com/cards/random?q=(t:plane+or+t:phenomenon)+{{ scryfall_query }}
+polling_headers: User-Agent=TRMNL_plugin&Accept=application/json
+polling_body: ''
+id: 129689
+custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin
+  field_type: author_bio
+  description: A random new Magic the Gathering Plane card daily via Scryfall.com
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com
+- keyname: scryfall_query
+  field_type: string
+  name: Scryfall Query String
+  optional: true
+  description: a <a href="https://scryfall.com/docs/syntax">scryfall query</a> to limit results to the set of cards you'd like to see
+name: Magic Plane of the Day
+refresh_interval: 1440

@@ -1,12 +1,23 @@
 <link rel="stylesheet" href="https://thepeopleseason.github.io/planechase/card-symbols.css">
+<style>
+  @font-face {
+    font-family: 'Beleren';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://thepeopleseason.github.io/planechase/images/Beleren2016-Bold.woff') format('woff');
+  }
+  .bel {
+    font-family: 'Beleren';
+  }
+</style>
 
-{% assign rarray = rarity | split: '' %} 
+{% assign rarray = rarity | split: '' %}
 {% assign cn = collector_number | prepend: "000" | slice: -4, 4 %}
 
 {% template card_face %}
 {% assign rbrace = "}" %}
 {% assign lbrace = "{" %}
-<span class="{{ face_or_card }}">{{ name }}</span> 
+<span class="{{ face_or_card }} bel">{{ name }}</span>
 <span class="description clamp--none">{{ type_line }}</span>
 <span class="description clamp--none">{{ oracle_text | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br }}
 <br>{{ flavor_text | newline_to_br }}</span>
