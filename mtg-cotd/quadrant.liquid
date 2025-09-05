@@ -16,9 +16,9 @@
 
 <div class="layout">
   <div class="column">
-    <span class="title title--small">{{ name }}  {{ mana_cost | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}</span>
+    <span class="bel title title--small">{{ name }}  {{ mana_cost | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}</span>
     <span class="description clamp--none">{{ type_line }}</span>
     <span class="description clamp--none">{{ otext | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br }}</span>
-    <span class="title title--small clamp--none text--right">{{ ptl }}</span>
+    <span class="bel title title--small clamp--none text--right">{{ ptl }}</span>
   </div>
 </div>

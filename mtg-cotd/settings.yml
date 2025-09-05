@@ -4,10 +4,10 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: https://api.scryfall.com/cards/random?q=game:paper+-is:artseries+{{ scryfall_query }}
+polling_url: "https://api.scryfall.com/cards/random?q=game:paper+-is:artseries+{{ scryfall_query }}\r\n"
 polling_headers: User-Agent=TRMNL_plugin&Accept=application/json
 polling_body: ''
-id: 141190
+id: 127986
 custom_fields:
 - keyname: doesnt_matter
   name: About This Plugin
@@ -21,5 +21,5 @@ custom_fields:
   name: Scryfall Query String
   optional: true
   description: a scryfall query to limit results to the set of cards you'd like to see
-name: MTG Card of the Day DEV
+name: MTG Card of the Day
 refresh_interval: 1440

@@ -1,4 +1,15 @@
 <link rel="stylesheet" href="https://thepeopleseason.github.io/planechase/card-symbols.css">
+<style>
+  @font-face {
+    font-family: 'Beleren';
+    font-style: normal;
+    font-weight: bold;
+    src: url('https://thepeopleseason.github.io/planechase/images/Beleren2016-Bold.woff') format('woff');
+  }
+  .bel {
+    font-family: 'Beleren';
+  }
+</style>
 
 {% assign rarray = rarity | split: '' %} 
 {% assign cn = collector_number | prepend: "000" | slice: -4, 4 %}
@@ -18,14 +29,14 @@
     {% assign ptl = loyalty %}
   {% endif %}
 {% endif %}
-<span class="{{ face_or_card }}">{{ name }}
+<span class="bel {{ face_or_card }}">{{ name }}
 {% if mana_cost != empty %}{{ mana_cost | prepend: " &nbsp; "  | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}{% endif %}
 </span> 
 <span class="description clamp--none">{{ type_line }}</span>
 <span class="description clamp--none {% unless flavor_text == empty %}label--underline{% endunless %}">
   {{ oracle_text | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br  }}
   <br> {{ flavor_text | newline_to_br }}</span>
-{% if ptl != empty %}<span class="{{ face_or_card }} text--right"><strong>{{ ptl }}</strong></span>{% endif %}
+{% if ptl != empty %}<span class="bel {{ face_or_card }} text--right"><strong>{{ ptl }}</strong></span>{% endif %}
 <span class="description"> Artist: {{ artist }} </span>
 {% endtemplate %}
 

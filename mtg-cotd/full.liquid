@@ -9,7 +9,7 @@
   </div>
   <div class="column w--auto">
   {% if card_faces %}
-    <span class="title">{{ name }}</span>
+    <span class="bel title">{{ name }}</span>
     {% for card in card_faces %}
       {% render "card_face", name: card.name, mana_cost: card.mana_cost, type_line: card.type_line, oracle_text: card.oracle_text, flavor_text: card.flavor_text, power: card.power, toughness: card.toughness, loyalty: card.loyalty, artist: card.artist, faces: true %}
     {% endfor %}
