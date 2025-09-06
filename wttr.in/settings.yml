@@ -9,8 +9,21 @@ polling_headers: ''
 polling_body: ''
 id: 149512
 custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin (wttr.in)
+  field_type: author_bio
+  description: Weather display pulled from <a href="https://wttr.in/">wttr.in</a>
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com
 - keyname: location
   field_type: string
   name: Weather Location
-name: wttr.in test
+- keyname: measurements
+  field_type: select
+  options:
+  - Imperial
+  - Metric
+  name: Measurements
+name: Wttr.in
 refresh_interval: 120

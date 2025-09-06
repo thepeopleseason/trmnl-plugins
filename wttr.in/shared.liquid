@@ -29,10 +29,10 @@
   }
   .daylabel {
     text-align: center;
-    font-weight: bold;
     margin-bottom: -20px;
     padding: 2px;
     border: solid;
+    border-width: 1px;
   }
   .label {
     line-height: 78%;
@@ -89,31 +89,59 @@
 {% when 'S' %}↑
 {% when 'E' %}←
 {% when 'W' %}→
-{% else %}. 
+{% else %}.
 {% endcase %}
 {% endtemplate %}
 
 {% template condition %}
-{% if current %}
-{% assign temp = data.temp_F %}
-{% assign ws = data.windspeedMiles %}
-{% assign stretch = "" %}
-{% assign precip = "" %}
-{% else %}
-{% assign temp = data.tempF %}
-{% assign stretch = "stretch-x" %}
-{% assign ws = data.windspeedMiles|append: "-"|append: data.WindGustMiles %}
-{% assign precip = data.chanceofrain | prepend: "| " | append: "%" %}
+{% if trmnl.plugin_settings.custom_fields_values.measurements == "metric" %}
+  {% assign metric = true %}
 {% endif %}
+
+{% assign temp = data.tempF %}
+{% assign feelslike = data.FeelsLikeF %}
+{% assign tempmeasure = 'F' %}
+{% assign ws = data.windspeedMiles|append: "-"|append: data.WindGustMiles | append: " mph" %}
+{% assign vis = data.visibilityMiles | append: " mi" %}
+{% assign precip = data.precipInches | append: " in " %}
+{% assign precipPct = data.chanceofrain | prepend: "| " | append: "%" %}
+{% assign stretch = "stretch-x" %}
+
+{% if metric %}
+  {% assign temp = data.tempC %}
+  {% assign feelslike = data.FeelsLikeC %}
+  {% assign tempmeasure = 'C' %}
+  {% assign ws = data.windspeedKmph | append: "-" | append: data.WindGustKmph | append: " km/h"| %}
+  {% assign vis = data.visibility | append: " km" %}
+  {% assign precip = data.precipMM | append: " mm " %}
+{% endif %}
+
+{% if current %}
+  {% assign temp = data.temp_F %}
+  {% assign ws = data.windspeedMiles | append: " mph" %}
+  {% assign precipPct = "" %}
+  {% assign stretch = "" %}
+  {% if metric %}
+    {% assign temp = data.temp_C %}
+    {% assign ws = data.windspeedKmph | append: " km\h" %}
+  {% endif %}
+{% endif %}
+
+{% if temp == feelslike %}
+  {% assign fulltemp = temp | append: " °" | append: tempmeasure %}
+{% else %}
+  {% assign fulltemp = temp | append: "(" | append: feelslike | append: ") °" | append: tempmeasure %}
+{% endif %}
+
 <div class="{{ stretch }}">
   <div class="label label--small timelabel">{{ timelabel }}</div>
   <div class="item">{% render "weather_icon", status: data.weatherDesc[0].value %}
     <div class="{{ stretch }}">
       <span class="label label--small clamp--1">{{ data.weatherDesc[0].value }}</span><br>
-      <span class="label label--small">{{ temp }}({{ data.FeelsLikeF }}) °F</span><br>
-      <span class="label label--small">{% render "wind", dir: data.winddir16Point %} {{ ws }} mph</span><br>
-      <span class="label label--small">{{ data.visibilityMiles }} mi</span><br>
-      <span class="label label--small">{{ data.precipInches }} in {{ precip }}</span><br>
+      <span class="label label--small">{{ fulltemp }}</span><br>
+      <span class="label label--small">{% render "wind", dir: data.winddir16Point %} {{ ws }}</span><br>
+      <span class="label label--small">{{ vis }}</span><br>
+      <span class="label label--small">{{ precip | append: precipPct }}</span><br>
     </div>
   </div>
 </div>
@@ -121,11 +149,11 @@
 
 {% template day %}
 <div class="daylabel label label--small">{{ day_struct.date | date: "%a %d %b" }}</div>
-<div class="flex flex--row stretch-x"> 
-  {% render "condition", data: day_struct.hourly[3], timelabel: "Morning" %}
-  {% render "condition", data: day_struct.hourly[4], timelabel: "Noon" %}
-  {% render "condition", data: day_struct.hourly[6], timelabel: "Evening" %}
-  {% render "condition", data: day_struct.hourly[7], timelabel: "Night" %}
+<div class="flex flex--row stretch-x">
+  {% render "condition", data: day_struct.hourly[3], timelabel: "Morning", trmnl: trmnl %}
+  {% render "condition", data: day_struct.hourly[4], timelabel: "Noon", trmnl: trmnl %}
+  {% render "condition", data: day_struct.hourly[6], timelabel: "Evening", trmnl: trmnl %}
+  {% render "condition", data: day_struct.hourly[7], timelabel: "Night", trmnl: trmnl %}
 </div>
 
 {% endtemplate %}
