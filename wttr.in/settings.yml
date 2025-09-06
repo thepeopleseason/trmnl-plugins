@@ -1,7 +1,7 @@
 ---
 strategy: polling
 no_screen_padding: 'no'
-dark_mode: 'no'
+dark_mode: 'yes'
 static_data: ''
 polling_verb: get
 polling_url: https://wttr.in/{{location}}?format=j1
@@ -12,5 +12,5 @@ custom_fields:
 - keyname: location
   field_type: string
   name: Weather Location
-name: My Plugin
-refresh_interval: 1440
+name: wttr.in test
+refresh_interval: 120
