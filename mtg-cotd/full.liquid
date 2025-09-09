@@ -1,3 +1,12 @@
+{% assign tform = "scale(0.75)" %}
+{% if (type_line contains "Battle") or (layout == 'split') %}
+  {% if keywords contains 'Aftermath' %}
+    {% assign tform = "scale(0.75)" %}
+  {% else %}
+    {% assign tform = "scale(0.70) rotate(90deg)" %}
+  {% endif %}
+{% endif %}
+
 <div class="layout">
   <div class="column h--auto w--72"> 
       {% if card_faces and card_faces[0].image_uris %}
@@ -5,7 +14,7 @@
       {% else %}
         {% assign png = image_uris.png %}
       {% endif %}
-      <img class="image image-dither" style="transform: scale(0.75);" src="{{ png }}">
+      <img class="image image-dither" style="transform: {{ tform }}" src="{{ png }}">
   </div>
   <div class="column w--auto">
   {% if card_faces %}
