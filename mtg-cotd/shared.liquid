@@ -42,7 +42,7 @@
 {% if mana_cost != empty %}{{ mana_cost | replace: '/', '' | prepend: " &nbsp; " | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>"  }}{% endif %}
 </span> 
 <span class="description clamp--none">{{ type_line }}</span>
-<span class="description clamp--none {% unless flavor_text == empty %}label--underline{% endunless %}">
+<span id="oracle" class="description clamp--none {% unless flavor_text == empty %}label--underline{% endunless %}">
   {{ oracle_text | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" | newline_to_br  }}
   <br> <em>{{ flavor_text | newline_to_br }}</em></span>
 {% if ptl != empty %}<span class="bel {{ face_or_card }} text--right"><strong>{{ ptl }}</strong></span>{% endif %}
