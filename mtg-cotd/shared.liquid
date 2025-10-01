@@ -14,6 +14,15 @@
 {% assign rarray = rarity | split: '' %} 
 {% assign cn = collector_number | prepend: "000" | slice: -4, 4 %}
 
+{% template postscript %}
+<script>
+  const oracle = document.getElementById('oracle');
+  oracle.innerHTML = oracle.innerHTML.replace(/card-symbol-(.)\/(.)/, (_, sym1, sym2) => {
+    return `card-symbol-`+ sym1 + sym2;  
+  });
+</script>
+{% endtemplate %}
+
 {% template card_face %}
 {% assign rbrace = "}" %}
 {% assign lbrace = "{" %}
@@ -30,7 +39,7 @@
   {% endif %}
 {% endif %}
 <span class="bel {{ face_or_card }}">{{ name }}
-{% if mana_cost != empty %}{{ mana_cost | prepend: " &nbsp; "  | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>" }}{% endif %}
+{% if mana_cost != empty %}{{ mana_cost | replace: '/', '' | prepend: " &nbsp; " | replace: lbrace, "<abbr class='card-symbol card-symbol-" | replace: rbrace, "'></abbr>"  }}{% endif %}
 </span> 
 <span class="description clamp--none">{{ type_line }}</span>
 <span class="description clamp--none {% unless flavor_text == empty %}label--underline{% endunless %}">
