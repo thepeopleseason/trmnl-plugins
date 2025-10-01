@@ -1,0 +1,40 @@
+<div class="layout layout--col h--96">
+  {% if trmnl.plugin_settings.custom_fields_values.show_char_stats == 'true' %}
+  {% render "character_stats", char: IDX_1 %}
+  {% endif %}
+  
+  <div class="columns">
+  {% unless trmnl.plugin_settings.custom_fields_values.exclude_tasks contains "habits" %}
+    <div class="column w--auto" data-overflow="true">
+    <span class="title">Habits</span>
+    {% for task in IDX_0.data %}
+    {% if task.type == "habit" %}
+    {% render "task_item", task: task, skip_label: true %}
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endunless %}
+  {% unless trmnl.plugin_settings.custom_fields_values.exclude_tasks contains "dailies" %}
+    <div class="column w--auto" data-overflow="true">
+    <span class="title">Dailies</span>
+    {% for task in IDX_0.data %}
+    {% if task.type == "daily" and task.isDue %}
+    {% render "task_item", task: task, streak: true %}
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endunless %}
+  {% unless trmnl.plugin_settings.custom_fields_values.exclude_tasks contains "todos" %}
+    <div class="column w--auto" data-overflow="true">
+    <span class="title">Todo</span>
+    {% for task in IDX_0.data %} 
+    {% if task.type == "todo" %}
+    {% render "task_item", task: task, skip_label: true %}
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endunless %}
+  </div>
+</div>
+
+{% render "title_bar", trmnl: trmnl %}

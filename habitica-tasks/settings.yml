@@ -1,0 +1,44 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: "https://habitica.com/api/v3/tasks/user\r\nhttps://habitica.com/api/v3/user"
+polling_headers: x-api-user={{ api_user}}&x-api-key={{ api_key }}&x-client=c1545696-e2e4-4696-8b0b-e967a769b201_trmnl_plugin
+polling_body: ''
+id: 123494
+custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin (DIN Weather)
+  field_type: author_bio
+  description: Habitica.com Daily Tasks and Todo List
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com
+- keyname: api_key
+  field_type: string
+  name: API Key
+  description: API Key from <a href="https://habitica.com/user/settings/siteData">https://habitica.com/user/settings/siteData</a>
+- keyname: api_user
+  field_type: string
+  name: API User
+  description: User ID from <a href="https://habitica.com/user/settings/siteData">https://habitica.com/user/settings/siteData</a>
+- keyname: exclude_tasks
+  field_type: select
+  name: Exclude task types
+  options:
+  - None
+  - Habits
+  - Dailies
+  - Todos
+  multiple: true
+- keyname: show_char_stats
+  field_type: select
+  options:
+  - 'Yes': true
+  - 'No': false
+  name: Show Character Stats (Full Screen Only)
+  description: Display your Habitica character stats (Class, Level, Health, MP, Experience)
+name: Habitica Tasks
+refresh_interval: 240

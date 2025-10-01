@@ -1,0 +1,43 @@
+{% template task_item %}
+{% assign taskclass = "title title--small" %}
+{% if small %}{% assign taskclass = "label label--small" %}{% endif %}
+  <div class="item">
+    <div class="meta">
+      <span class="index">{% if task.completed %}x{% endif %}</span>
+    </div>
+    <div class="content">
+      <span class="{{ taskclass }} clamp--none">{{ task.text | markdown_to_html | strip_html }}</span>
+      {% unless skip_label %}
+      <span class="label label--small clamp--none">
+        {% if streak %}Streak: {{ task.streak | number_with_delimiter: "," }}{% endif %}.
+        {% if task.checklist.size > 0 %}Checklist items: {{ task.checklist | size }} {% endif %}
+      </span>
+      {% endunless %}
+    </div>
+  </div>
+{% endtemplate %}
+
+{% template character_stats %}
+<div class="grid">
+ <div class="item">
+   <div class="meta"></div>
+   <div class="content">
+     <span class="value value--small">{{ char.data.profile.name }} ({{ char.data.auth.local.username}})</span>
+     <span class="label" style="margin-left: 15px;">
+   Level {{ char.data.stats.lvl }} {{ char.data.stats.class | capitalize }}<br>
+   Health: {{ char.data.stats.hp }} / {{ char.data.stats.maxHealth }}<br>
+   Experience: {{ char.data.stats.exp }} / {{ char.data.stats.toNextLevel }}<br>
+   Mana: {{ char.data.stats.mp }} / {{ char.data.stats.maxMP }}<br>
+     </span>
+   </div>
+ </div>
+</div>
+<div class="divider"></div>
+{% endtemplate %}
+
+{% template title_bar %}
+<div class="title_bar">
+  <img class="image" src="https://habitica.com/static/icons/favicon_192x192.png">
+  <div class="title">{{ trmnl.plugin_settings.instance_name }}</div>
+</div>
+{% endtemplate %}
