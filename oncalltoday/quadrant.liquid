@@ -1,0 +1,14 @@
+<div class="layout">
+  <div class="columns">
+    <div class="column">
+      {% comment %} Remove the '| remove: "E2E"' when forking this recipe {% endcomment %}
+      <div class="title text--center">{{ IDX_0.schedule.name | remove: "E2E" }} On Call Today </div>
+      {% for user in IDX_1.users %}
+      {% render "user", user: user, size: "small" %}
+      {% endfor %}
+      {% if IDX_0.schedule.next_oncall_for_user %}
+      {% render "next_block", next: IDX_0.schedule.next_oncall_for_user, size: "small" %}
+      {% endif %}      
+    </div>
+  </div>
+</div>

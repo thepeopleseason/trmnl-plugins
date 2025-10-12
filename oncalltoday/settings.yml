@@ -1,0 +1,33 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: "https://api.pagerduty.com/schedules/{{ schedule_id }}{% if user_id %}?include_next_oncall_for_user={{ user_id}}{% endif %}\r\nhttps://api.pagerduty.com/schedules/{{ schedule_id}}/users?since={{ 'now' | date: \"%Y-%m-%d\" }}&until={{ 'now' | date: '%s' | plus:86400 | date: '%Y-%m-%d' }}"
+polling_headers: authorization=Token token%3d{{ api_token }}&Accept=application/json&content-type=application/json
+polling_body: ''
+id: 158498
+custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin
+  field_type: author_bio
+  description: Displays the current oncall user, and the next scheduled oncall for a supplied user for schedules on Pagerduty.com. More displayed information has been set up under comments for privacy reasons. Forking this recipe is required to remove anonymization.
+  github_url: https://github.com/thepeopleseason
+  learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
+  email_address: matchstick@gmail.com
+- keyname: api_token
+  field_type: string
+  name: API Token
+  description: Account API User Token. Create one under the User Settings tab of your profile. Requires <a href="https://support.pagerduty.com/main/docs/advanced-permissions">Advanced Permissions</a>.
+- keyname: schedule_id
+  field_type: string
+  name: PagerDuty Schedule ID
+  description: A Pagerduty Schedule ID, found in the URL of the Schedule page (e.g. https://pagerduty.com/schedules/[id])
+- keyname: user_id
+  field_type: string
+  name: Your Personal User ID (Optional)
+  description: Your user id, if you would like to see when your next on call happens. Found in the URL of your profile page (e.g. https://pagerduty.com/users/[id])
+  optional: true
+name: 'PagerDuty: On Call Today'
+refresh_interval: 1440

@@ -1,0 +1,27 @@
+{% template user %}
+    {% comment %} Replace hardcoded name with `{{ user.name }}` after forking. {% endcomment %}
+    <div class="value text--center{% if size == 'small' %} value--small{% endif %}">Epitome Tagg</div>
+    {% comment %} Remove initial comment tag following forking
+    <div class="text--center">{{ user.job_title }}<br>
+      Email: {{ user.email }}<br>
+      Time Zone: {{ user.time_zone }}</div>
+    Remove this block of text and closing comment tag after forking
+    This would be a good area to build this out with email address/avatar, etc.
+    But I hesitate to do so with production data for privacy reasons.
+    {% endcomment %}
+{% endtemplate %}
+
+{% template next_block %}
+<div class="divider"></div>
+<div class="title text--center">Next Scheduled On Call Rotation for Katia Grimmsdottir{% comment %} Replace hardcoded name with {{ next.user.summary }} after forking{% endcomment %}</div>
+<div class="text--center {% if size == 'small' %} label--small{% endif %}">{{ next.start | date: "%A %Y-%m-%d %H:%M %p" }} to 
+  {{ next.end | date: "%A %Y-%m-%d %H:%M %p" }}</div>
+{% endtemplate %}
+
+{% template title_bar %}
+<div class="title_bar">
+  <img class="image image-dither" src="https://developer.pagerduty.com/favicon-32x32.png">
+  <span class="title">{{ trmnl.plugin_settings.instance_name }}</span>
+  <span class="instance">{{ schedule_name }}</span>
+</div>
+{% endtemplate %}
