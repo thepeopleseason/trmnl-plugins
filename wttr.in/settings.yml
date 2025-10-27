@@ -12,18 +12,20 @@ custom_fields:
 - keyname: doesnt_matter
   name: About This Plugin (wttr.in)
   field_type: author_bio
-  description: Weather display pulled from <a href="https://wttr.in/">wttr.in</a>
+  description: Weather display pulled from <a href="https://wttr.in/">wttr.in</a>. Forking recommended, as updates to the weather_icon template under Shared Markup will account for unknown weather conditions.
   github_url: https://github.com/thepeopleseason
   learn_more_url: https://bsky.app/profile/thepeopleseason.bsky.social
   email_address: matchstick@gmail.com
 - keyname: location
   field_type: string
+  default: 10001
   name: Weather Location
+  description: A location for weather information based on <a href="https://github.com/chubin/wttr.in#usage">the documentation</a>.
 - keyname: measurements
   field_type: select
   options:
   - Imperial
   - Metric
   name: Measurements
-name: Wttr.in
-refresh_interval: 120
+name: Wttr.in Weather
+refresh_interval: 60

@@ -37,65 +37,99 @@
   .label {
     line-height: 78%;
   }
+  .winddir {
+    font-size: 85%;
+  }
+  .title {
+    margin-top: 8px;
+    margin-bottom: 5px;
+  }
 </style>
 
 {% template weather_icon %}
 <span class="material-symbols-outlined weather-icon-large">
-  {% case status %}
-  {% when 'clear_day' %}wb_sunny
-  {% when 'Sunny' %}wb_sunny
-  {% when 'Clear ' %}wb_sunny
-  {% when 'clear_night' %}dark_mode
-  {% when 'partly_cloudy_day' %}partly_cloudy_day
-  {% when 'Partly cloudy' %}partly_cloudy_day
-  {% when 'Partly Cloudy ' %}partly_cloudy_day
-  {% when 'partly_cloudy_night' %}nights_stay
-  {% when 'cloudy' %}cloud
-  {% when 'Overcast ' %}cloud
-  {% when 'Cloudy ' %}cloud
-  {% when 'rainy' %}rainy
-  {% when 'Shower in vicinity' %}rainy
-  {% when 'Light rain shower' %}rainy
-  {% when 'Patchy rain nearby' %}rainy
-  {% when 'Moderate rain' %}rainy
-  {% when 'Rain shower' %}rainy
-  {% when 'rainy' %}rainy
-  {% when 'thunderstorm' %}thunderstorm
-  {% when 'Thundery outbreaks in nearby' %}thunderstorm
-  {% when 'bolt' %}bolt
-  {% when 'snowy' %}cloudy_snowing
-  {% when 'foggy' %}foggy
-  {% when 'error' %}error
+  {% assign stat = status | rstrip %}
+  {% case stat %}
+  {% when '113' %}wb_sunny
+  {% when '116' %}partly_cloudy_day
+  {% when '119' %}cloud
+  {% when '122' %}cloud
+  {% when '143' %}mist
+  {% when '176' %}rainy
+  {% when '179' %}weather_mix
+  {% when '182' %}weather_mix
+  {% when '185' %}weather_mix
+  {% when '200' %}thunderstorm
+  {% when '227' %}weather_snowy
+  {% when '230' %}snowing_heavy
+  {% when '248' %}mist
+  {% when '260' %}mist
+  {% when '263' %}rainy
+  {% when '266' %}rainy
+  {% when '281' %}weather_mix
+  {% when '284' %}weather_mix
+  {% when '293' %}rainy
+  {% when '296' %}rainy
+  {% when '299' %}rainy_heavy
+  {% when '302' %}rainy_heavy
+  {% when '305' %}rainy_heavy
+  {% when '308' %}rainy_heavy
+  {% when '311' %}weather_mix
+  {% when '314' %}weather_mix
+  {% when '317' %}weather_mix
+  {% when '320' %}weather_snowy
+  {% when '323' %}weather_snowy
+  {% when '326' %}weather_snowy
+  {% when '329' %}snowing_heavy
+  {% when '332' %}snowing_heavy
+  {% when '335' %}snowing_heavy
+  {% when '338' %}snowing_heavy
+  {% when '350' %}weather_mix
+  {% when '353' %}rainy
+  {% when '356' %}rainy_heavy
+  {% when '359' %}rainy_heavy
+  {% when '362' %}weather_mix
+  {% when '365' %}weather_mix
+  {% when '368' %}weather_snowy
+  {% when '371' %}snowing_heavy
+  {% when '374' %}weather_mix
+  {% when '377' %}weather_mix
+  {% when '386' %}thunderstorm
+  {% when '389' %}thunderstorm
+  {% when '392' %}thunderstorm
+  {% when '395' %}snowing_heavy
   {% else %}device_unknown
-  {% endcase %}
+{% endcase %}
 </span>
 {% endtemplate %}
 
 {% template wind %}
-{% case dir %}
-{% when 'NNW' %}↘
-{% when 'NNE' %}↙
-{% when 'WNW' %}↘
-{% when 'ENE' %}↙
-{% when 'SSW' %}↗
-{% when 'SSE' %}↖
-{% when 'WSW' %}↗
-{% when 'ESE' %}↖
-{% when 'NW' %}↘
-{% when 'NE' %}↙
-{% when 'SW' %}↗
-{% when 'SE' %}↖
-{% when 'N' %}↓
-{% when 'S' %}↑
-{% when 'E' %}←
-{% when 'W' %}→
-{% else %}.
-{% endcase %}
+<span class="winddir">
+  {% case dir %}
+  {% when 'NNW' %}↘
+  {% when 'NNE' %}↙
+  {% when 'WNW' %}↘
+  {% when 'ENE' %}↙
+  {% when 'SSW' %}↗
+  {% when 'SSE' %}↖
+  {% when 'WSW' %}↗
+  {% when 'ESE' %}↖
+  {% when 'NW' %}↘
+  {% when 'NE' %}↙
+  {% when 'SW' %}↗
+  {% when 'SE' %}↖
+  {% when 'N' %}↓
+  {% when 'S' %}↑
+  {% when 'E' %}←
+  {% when 'W' %}→
+  {% else %}.
+  {% endcase %}
+</span>
 {% endtemplate %}
 
 {% template condition %}
 {% if trmnl.plugin_settings.custom_fields_values.measurements == "metric" %}
-  {% assign metric = true %}
+{% assign metric = true %}
 {% endif %}
 
 {% assign temp = data.tempF %}
@@ -108,34 +142,34 @@
 {% assign stretch = "stretch-x" %}
 
 {% if metric %}
-  {% assign temp = data.tempC %}
-  {% assign feelslike = data.FeelsLikeC %}
-  {% assign tempmeasure = 'C' %}
-  {% assign ws = data.windspeedKmph | append: "-" | append: data.WindGustKmph | append: " km/h"| %}
-  {% assign vis = data.visibility | append: " km" %}
-  {% assign precip = data.precipMM | append: " mm " %}
+{% assign temp = data.tempC %}
+{% assign feelslike = data.FeelsLikeC %}
+{% assign tempmeasure = 'C' %}
+{% assign ws = data.windspeedKmph | append: "-" | append: data.WindGustKmph | append: " km/h"| %}
+{% assign vis = data.visibility | append: " km" %}
+{% assign precip = data.precipMM | append: " mm " %}
 {% endif %}
 
 {% if current %}
-  {% assign temp = data.temp_F %}
-  {% assign ws = data.windspeedMiles | append: " mph" %}
-  {% assign precipPct = "" %}
-  {% assign stretch = "" %}
-  {% if metric %}
-    {% assign temp = data.temp_C %}
-    {% assign ws = data.windspeedKmph | append: " km\h" %}
-  {% endif %}
+{% assign temp = data.temp_F %}
+{% assign ws = data.windspeedMiles | append: " mph" %}
+{% assign precipPct = "" %}
+{% assign stretch = "" %}
+{% if metric %}
+{% assign temp = data.temp_C %}
+{% assign ws = data.windspeedKmph | append: " km\h" %}
+{% endif %}
 {% endif %}
 
 {% if temp == feelslike %}
-  {% assign fulltemp = temp | append: " °" | append: tempmeasure %}
+{% assign fulltemp = temp | append: " °" | append: tempmeasure %}
 {% else %}
-  {% assign fulltemp = temp | append: "(" | append: feelslike | append: ") °" | append: tempmeasure %}
+{% assign fulltemp = temp | append: "(" | append: feelslike | append: ") °" | append: tempmeasure %}
 {% endif %}
 
 <div class="{{ stretch }}">
   <div class="label label--small timelabel">{{ timelabel }}</div>
-  <div class="item">{% render "weather_icon", status: data.weatherDesc[0].value %}
+  <div class="item">{% render "weather_icon", status: data.weatherCode %}
     <div class="{{ stretch }}">
       <span class="label label--small clamp--1">{{ data.weatherDesc[0].value }}</span><br>
       <span class="label label--small">{{ fulltemp }}</span><br>
@@ -149,11 +183,15 @@
 
 {% template day %}
 <div class="daylabel label label--small">{{ day_struct.date | date: "%a %d %b" }}</div>
-<div class="flex flex--row stretch-x">
-  {% render "condition", data: day_struct.hourly[3], timelabel: "Morning", trmnl: trmnl %}
-  {% render "condition", data: day_struct.hourly[4], timelabel: "Noon", trmnl: trmnl %}
-  {% render "condition", data: day_struct.hourly[6], timelabel: "Evening", trmnl: trmnl %}
-  {% render "condition", data: day_struct.hourly[7], timelabel: "Night", trmnl: trmnl %}
-</div>
+{% if vertical == true %}
+<div class="grid grid--cols-2 stretch-x">
+  {% else %}
+  <div class="flex flex--row stretch-x">
+    {% endif %}
+    {% render "condition", data: day_struct.hourly[3], timelabel: "Morning", trmnl: trmnl %}
+    {% render "condition", data: day_struct.hourly[4], timelabel: "Noon", trmnl: trmnl %}
+    {% render "condition", data: day_struct.hourly[6], timelabel: "Evening", trmnl: trmnl %}
+    {% render "condition", data: day_struct.hourly[7], timelabel: "Night", trmnl: trmnl %}
+  </div>
 
-{% endtemplate %}
+  {% endtemplate %}
