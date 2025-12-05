@@ -11,6 +11,7 @@ id: 123494
 custom_fields:
 - keyname: doesnt_matter
   name: About This Plugin (DIN Weather)
+  category: personal,productivity
   field_type: author_bio
   description: Habitica.com Daily Tasks and Todo List
   github_url: https://github.com/thepeopleseason
